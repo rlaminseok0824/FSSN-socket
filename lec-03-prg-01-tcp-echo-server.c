@@ -14,10 +14,12 @@ int g_client_socket[CLNT_MAX];
 int g_client_count = 0;
 int g_port = 65456;
 
-void send_all(char * msg){
-	for(int i = 0; i < g_client_count;i++){
-		write(g_client_socket[i],msg,strlen(msg)+1);
-	}
+void send_all(char * msg,int my_sock){
+	write(my_sock,msg,strlen(msg) + 1);
+
+//	for(int i = 0; i < g_client_count;i++){
+//		write(g_client_socket[i],msg,strlen(msg)+1);
+//	}
 }
 
 int main(int argc,char ** argv){
@@ -60,7 +62,7 @@ int main(int argc,char ** argv){
 				continue;
 			}
 			printf("> echoed: %s\n",buff);
-			send_all(buff);
+			send_all(buff,client_socket);
 			if(strcmp(buff,"quit") == 0){
 				//flag = 1;
 				break;

@@ -8,7 +8,7 @@
 #include <netinet/in.h>
 
 #define BUFFSIZE 200
-
+#define _CRT_SECUER_NO_WARNINGS
 int port = 65456;
 
 int main(int argc,char ** argv){
@@ -32,7 +32,7 @@ int main(int argc,char ** argv){
 	int readlen = 0;
 	while(1){
 		printf("> ");
-		scanf("%s",&msg);
+		scanf("%s",msg);
 		//printf("send : %s",msg);
 		send(client_socket,msg,strlen(msg) + 1,0);
 		readlen = recv(client_socket,recv_msg,BUFFSIZE,0);
@@ -42,5 +42,6 @@ int main(int argc,char ** argv){
 		}
 	}	
 	printf("> echo-client is de-activated\n");
+	close(client_socket);
 	return 1;
 }
