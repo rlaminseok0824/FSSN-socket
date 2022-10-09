@@ -22,9 +22,10 @@ int main(int argc,char ** argv){
 	server_addr.sin_port=htons(port);
 	
 	if(connect(client_socket,(struct sockaddr *)&server_addr,sizeof(server_addr))== -1){
-		printf("connection error!\n");
+		printf("> connect() failed and program terminated\n");
+		close(client_socket);
+		return 0;
 	}
-	printf("connection success!\n");
 	
 	char msg[BUFFSIZE];
 	char recv_msg[BUFFSIZE];
